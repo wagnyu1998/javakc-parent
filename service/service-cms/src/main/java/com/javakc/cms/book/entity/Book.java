@@ -27,11 +27,11 @@ import java.util.Date;
         @Column(name = "id")
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @ApiModelProperty(value = "书籍主键")
-        private int id;
+        private Integer id;
 
-        @Column(name = "title")
+        @Column(name = "book_name")
         @ApiModelProperty(value = "书名")
-        private String title;
+        private String bookName;
 
         @Column(name = "book_author")
         @ApiModelProperty(value = "作者")
@@ -46,7 +46,7 @@ import java.util.Date;
         private Integer classify2Id ;
 
         @Column(name = "is_serialize")
-        @ApiModelProperty(value = "是否连载")
+        @ApiModelProperty(value = "是否连载 1是 2否")
         private Integer isSerialize ;
 
         @Column(name = "word_number")
@@ -54,11 +54,11 @@ import java.util.Date;
         private Integer wordNumber ;
 
         @Column(name = "status")
-        @ApiModelProperty(value = "状态(上线/下线)")
+        @ApiModelProperty(value = "状态 1上线 0未上线")
         private Integer status ;
 
         @Column(name = "is_full_charge")
-        @ApiModelProperty(value = "是否全本收费")
+        @ApiModelProperty(value = "是否免费 1免费 0收费")
         private Integer isFullCharge ;
 
         @Column(name = "started_date")
@@ -96,7 +96,7 @@ import java.util.Date;
         private Date gmtCreate;
 
 
-        @Column(name = "gmt_modified",nullable = false,insertable = false)
+        @Column(name = "gmt_modified",nullable = false)
         @LastModifiedDate
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
         @ApiModelProperty(value = "更新时间", example = "2020-12-12 9:00:00")

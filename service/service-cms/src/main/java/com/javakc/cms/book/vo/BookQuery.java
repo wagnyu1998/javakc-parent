@@ -8,5 +8,5 @@ import lombok.Data;
 @Data
 public class BookQuery {
 
-    private String title;
+    private String bookName;
 }

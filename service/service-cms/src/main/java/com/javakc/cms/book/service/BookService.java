@@ -54,7 +54,7 @@ public class BookService extends BaseService<BaseDao,Book> {
          * !null表示 is not null
          */
         Specification<Book> specification=
-                new SimpleSpecificationBuilder<>().and("title",":",bookQuery.getTitle()).getSpecification();
+                new SimpleSpecificationBuilder<>().and("bookName",":",bookQuery.getBookName()).getSpecification();
 
         Page page=dao.findAll(specification, PageRequest.of(pageNo-1,pageSize));
         return page;

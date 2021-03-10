@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,9 +24,11 @@ import java.util.List;
 /**
  * 书籍管理-表现层
  */
+
 @Api(tags = "书籍管理 - 控制层")
 @RestController
 @RequestMapping("/cms/book")
+@CrossOrigin
 public class BookController {
 
     @Autowired
@@ -46,7 +49,7 @@ public class BookController {
      *
      */
     @ApiOperation("带条件的分页查询 - 书籍管理信息 ")
-    @PostMapping(" findAll/{pageNo}/{pageSize}")
+    @PostMapping("findAll/{pageNo}/{pageSize}")
     public APICODE findAll(
             @RequestBody(required = false)
             @ApiParam(name = "bookQuery",value = "查询条件封装类",required = false) BookQuery bookQuery,
@@ -98,5 +101,21 @@ public class BookController {
         bookService.saveOrUpdate(book);
         return APICODE.OK();
     }
+
+    @ApiOperation(value = "设置书籍上下架")
+    @PutMapping("upOrDownBook/{bookId}/{status}")
+    public APICODE upOrDownBook(
+            @PathVariable("bookId")
+            @ApiParam(name = "bookId",value = "书籍ID",required = true) Integer bookId,
+            @PathVariable("status")
+            @ApiParam(name = "status",value = "状态",required = true) Integer status){
+
+        Book book=bookService.getById(bookId);
+        // 设置状态
+        book.setStatus(status);
+        bookService.saveOrUpdate(book);
+        return APICODE.OK();
+    }
+
 
 }
